@@ -21,9 +21,14 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.paddingFromBaseline
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -32,7 +37,11 @@ import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -99,12 +108,52 @@ fun SearchBar(
     )
 }
 
-// Step: Align your body - Alignment
+// Step 5: Align your body - Alignment
+// For a Column, you decide how its children should be aligned horizontally
+// (Start, CenterHorizontaly, End).
+// For a Row, you set the vertical alignment (Top, CenterVertically, Bottom).
+// For a Box, you combine both horizontal and vertical alignment (TopStart,
+// TopCenter, TopEnd, CenterStart, Center, CenterEnd, BottomStart, BottomCenter,
+// BottomEnd).
 @Composable
 fun AlignYourBodyElement(
+    @DrawableRes drawable: Int,
+    @StringRes text: Int,
     modifier: Modifier = Modifier
 ) {
-    // Implement composable here
+    Column(
+        // To align composables inside a parent container, you set the alignment
+        // of that parent container. So instead of telling the child to position
+        // itself in its parent, you tell the parent how to align its children.
+        // All of the container's children will follow this same alignment
+        // pattern. You can override the behavior of a single child by adding an
+        // align modifier to it.
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
+    ) {
+        Image(
+            painter = painterResource(drawable),
+            // Set the contentDescription to null, as this image is purely
+            // decorative.
+            contentDescription = null,
+            // The image also needs to be scaled correctly (Fit, FillBounds,
+            // Crop)
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                // Adapt the composable to fit a certain size.
+                .size(88.dp)
+                // Adapt the composable's appearance: you can set it to any
+                // Shape and it clips the composable's content to that shape.
+                .clip(CircleShape)
+        )
+        Text(
+            text = stringResource(text),
+            style = MaterialTheme.typography.h3,
+            modifier = Modifier.paddingFromBaseline(
+                top = 24.dp, bottom = 8.dp
+            )
+        )
+    }
 }
 
 // Step: Favorite collection card - Material Surface
@@ -191,6 +240,8 @@ fun SearchBarPreview() {
 fun AlignYourBodyElementPreview() {
     MySootheTheme {
         AlignYourBodyElement(
+            R.drawable.ab1_inversions,
+            R.string.ab1_inversions,
             modifier = Modifier.padding(8.dp)
         )
     }
