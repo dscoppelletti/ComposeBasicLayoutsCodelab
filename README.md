@@ -3,6 +3,11 @@
 This folder contains the source code for
 the [Basic Layouts in Compose Codelab](http://developer.android.com/codelabs/jetpack-compose-layouts)
 
+## References
+
+* [Compose guidelines](http://android.googlesource.com/platform/frameworks/support/+/androidx-main/compose/docs/compose-api-guidelines.md)
+* [Full list of available modifiers](http://developer.android.com/jetpack/compose/modifiers-list)
+
 ## License
 
 ```

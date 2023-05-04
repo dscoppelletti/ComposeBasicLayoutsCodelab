@@ -21,9 +21,19 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
+import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.codelab.basiclayouts.ui.theme.MySootheTheme
@@ -35,12 +45,58 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-// Step: Search bar - Modifiers
+// Step 4: Search bar - Modifiers
+// The SearchBar composable function accepts a modifier parameter and passes
+// this on to the TextField. This is a best practice as per Compose guidelines.
+// This allows the method's caller to modify the composable's look & feel, which
+// makes it more flexible and reusable.
 @Composable
 fun SearchBar(
     modifier: Modifier = Modifier
 ) {
-    // Implement composable here
+    TextField(
+        value = "",
+        onValueChange = {},
+        leadingIcon = {
+            Icon(
+                imageVector = Icons.Default.Search,
+                // This icon does not need a content description, as the text
+                // field's placeholder already describes the meaning of the text
+                // field. Remember that a content description is normally used
+                // for accessibility purposes and gives the user of your app a
+                // textual representation of an image or icon.
+                contentDescription = null
+            )
+        },
+        // Instead of a separate parameter for each color, the composable
+        // contains one combined parameter. Here you pass in a copy of the
+        // TextFieldDefaults data class, where you update only the colors that
+        // are different.
+        colors = TextFieldDefaults.textFieldColors(
+            backgroundColor = MaterialTheme.colors.surface
+        ),
+        placeholder = {
+            Text(stringResource(R.string.placeholder_search))
+        },
+        // When writing composables, you use modifiers to:
+        // . Change the composable's size, layout, behavior, and appearance.
+        // . Add information, like accessibility labels.
+        // . Process user input.
+        // . Add high-level interactions, like making an element clickable,
+        //   scrollable, draggable, or zoomable.
+        // When you set the modifier, you can chain multiple modifier methods to
+        // create a more complex adaptation.
+        modifier = modifier
+            // Makes sure that the search bar uses up all the horizontal space
+            // of its parent.
+            .fillMaxWidth()
+            // Makes sure that the composable has a specific minimum height.
+            // You set a minimum height, not a fixed height. This is the
+            // recommended approach, so that the text field can still grow in
+            // size when the user, for example, increases their font sizes in
+            // the system settings.
+            .heightIn(min = 56.dp)
+    )
 }
 
 // Step: Align your body - Alignment
