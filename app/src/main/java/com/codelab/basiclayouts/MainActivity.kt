@@ -22,7 +22,9 @@ import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
@@ -30,6 +32,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -194,12 +198,29 @@ fun FavoriteCollectionCard(
     }
 }
 
-// Step: Align your body row - Arrangements
+// Step 7: Align your body row - Arrangements
 @Composable
 fun AlignYourBodyRow(
     modifier: Modifier = Modifier
 ) {
-    // Implement composable here
+    // LazyRow only renders the elements that are shown on screen instead of all
+    // elements at the same time, which helps keep your app performant.
+    LazyRow(
+        // We can make a decision on how to place child composables on a
+        // container's main axis (horizontal for Row, vertical for Column).
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        // To maintain the same padding, but still scroll your content within
+        // the bounds of your parent list without clipping it.
+        contentPadding = PaddingValues(horizontal = 16.dp),
+        modifier = modifier
+    ) {
+        // The children of a LazyRow aren't composables. Instead, you use the
+        // Lazy list DSL that provides methods like item and items that emit
+        // composables as list items.
+        items(alignYourBodyData) { item ->
+            AlignYourBodyElement(item.drawable, item.text)
+        }
+    }
 }
 
 // Step: Favorite collections grid - LazyGrid

@@ -8,6 +8,8 @@ the [Basic Layouts in Compose Codelab](http://developer.android.com/codelabs/jet
 * [Compose guidelines](http://android.googlesource.com/platform/frameworks/support/+/androidx-main/compose/docs/compose-api-guidelines.md)
 * [Full list of available modifiers](http://developer.android.com/jetpack/compose/modifiers-list)
 * [Theming documentation](http://developer.android.com/jetpack/compose/themes)
+* [Documentation on list](http://developer.android.com/jetpack/compose/lists)
+* [Interactive Preview](http://developer.android.com/jetpack/compose/tooling#preview-interactive)
 
 ## License
 
