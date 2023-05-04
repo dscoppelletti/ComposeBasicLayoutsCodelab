@@ -10,6 +10,7 @@ the [Basic Layouts in Compose Codelab](http://developer.android.com/codelabs/jet
 * [Theming documentation](http://developer.android.com/jetpack/compose/themes)
 * [Documentation on list](http://developer.android.com/jetpack/compose/lists)
 * [Interactive Preview](http://developer.android.com/jetpack/compose/tooling#preview-interactive)
+* [Slot-based layout](http://developer.android.com/jetpack/compose/layouts/basics#slot-based-layouts)
 
 ## License
 
